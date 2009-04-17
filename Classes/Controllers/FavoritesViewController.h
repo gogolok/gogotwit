@@ -20,6 +20,7 @@
     TwitterClient*      twitterClient;
     NSString*           screenName;
     BOOL                isRestored;
+    int                 page;
 }
 
 - (void)loadTimeline:(NSString*)screenName;

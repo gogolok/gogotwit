@@ -19,8 +19,52 @@
 @synthesize favoritesCount;
 @synthesize following;
 @synthesize notifications;
+@synthesize needUpdate;
 
-- (void)updateWithJSonDictionary:(NSDictionary*)dic
+- (void)checkUpdate:(User*)user
+{
+    needUpdate = false;
+    
+    if (![profileImageUrl isEqualToString:user.profileImageUrl]) {
+        self.profileImageUrl = user.profileImageUrl;
+        needUpdate = true;
+    }
+    if (![screenName isEqualToString:user.screenName]) {
+        self.screenName = user.screenName;
+        needUpdate = true;
+    }
+    if (![name isEqualToString:user.name]) {
+        self.name = user.name;
+        needUpdate = true;
+    }
+    if (![location isEqualToString:user.location]) {
+        self.location = user.location;
+        needUpdate = true;
+    }
+    if (![description isEqualToString:user.description]) {
+        self.description = user.description;
+        needUpdate = true;
+    }
+    if (![url isEqualToString:user.url]) {
+        self.url = user.url;
+        needUpdate = true;
+    }
+    if (protected != user.protected) {
+        self.protected = user.protected;
+        needUpdate = true;
+    }
+    if (followersCount != user.followersCount) {
+        self.followersCount = user.followersCount;
+        needUpdate = true;
+    }
+    
+    self.friendsCount   = user.friendsCount;
+    self.statusesCount  = user.statusesCount;
+    self.favoritesCount = user.favoritesCount;
+    self.following      = user.following;
+}
+
+- (void)initWithJsonDictionary:(NSDictionary*)dic
 {
     [name release];
     [screenName release];
@@ -62,13 +106,12 @@
     [profileImageUrl retain];
 }
 
-- (User*)initWithJsonDictionary:(NSDictionary*)dic
+- (void)updateWithJSonDictionary:(NSDictionary*)dic
 {
-	self = [super init];
-    
-    [self updateWithJSonDictionary:dic];
-	
-	return self;
+    User *u = [[User alloc] init];
+    [u initWithJsonDictionary:dic];
+    [self checkUpdate:u];
+    [u release];
 }
 
 - (User*)initWithSearchResult:(NSDictionary*)dic
@@ -139,7 +182,17 @@
         return u;
     }
     
-    u = [[User alloc] initWithJsonDictionary:dic];
+    u = [User userWithId:[[dic objectForKey:@"id"] longValue]];
+    
+    if (u) {
+        [UserStore setUser:u];
+        [u updateWithJSonDictionary:dic];
+        return u;
+    }
+    
+    u = [[User alloc] init];
+    [u initWithJsonDictionary:dic];
+    u.needUpdate = true;
     [UserStore setUser:u];
     return u;
 }
@@ -156,6 +209,8 @@
 
 - (void)updateDB
 {
+    if (!needUpdate) return;
+    
     static Statement *stmt = nil;
     if (stmt == nil) {
         stmt = [DBConnection statementWithQuery:"REPLACE INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"];

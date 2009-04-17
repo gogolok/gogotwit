@@ -148,7 +148,7 @@
         if (![dic isKindOfClass:[NSDictionary class]]) {
             continue;
         }
-        User *user = [[User alloc] initWithJsonDictionary:dic];
+        User *user = [User userWithJsonDictionary:dic];
         if (ownFriendsList) {
             [Followee insertDB:user];
         }

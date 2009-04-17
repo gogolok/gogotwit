@@ -102,7 +102,10 @@
     timelineDataSource = [[FriendsTimelineDataSource alloc] initWithController:self tweetType:tab];
     self.tableView.dataSource = timelineDataSource;
     self.tableView.delegate   = timelineDataSource;
-    if (load) [self loadTimeline];
+    if (load) {
+        [self performSelector:@selector(loadTimeline) withObject:nil afterDelay:0.01];
+    }
+    [self.tableView reloadData];
 }
 
 - (IBAction) reload:(id) sender
@@ -169,6 +172,9 @@
 {
     BOOL flag = [[NSUserDefaults standardUserDefaults] boolForKey:@"autoScrollToFirstUnread"];
     if (flag == false) return;
+    
+    CGPoint offset = [self.tableView contentOffset];
+    if (offset.y != 0) return;
     
     if (unread) {
         if (unread < [timelineDataSource.timeline countStatuses]) {

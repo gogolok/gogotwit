@@ -50,9 +50,41 @@
     }
 }
 
++ (BOOL)needUpdate:(User*)user
+{
+    static Statement *stmt = nil;
+    if (stmt == nil) {
+        stmt = [DBConnection statementWithQuery:"SELECT * FROM followees WHERE user_id = ?"];
+        [stmt retain];
+    }
+    [stmt bindInt32:user.userId forIndex:1];
+    int ret = [stmt step];
+    if (ret != SQLITE_ROW) {
+        [stmt reset];
+        return true;
+    }
+    
+    Followee *f = [Followee initWithStatement:stmt];
+    [f autorelease];
+    [stmt reset];
+
+    if ([f.profileImageUrl isEqualToString:user.profileImageUrl] &&
+        [f.screenName isEqualToString:user.screenName] &&
+        [f.name isEqualToString:user.name]) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
 + (void)insertDB:(User*)user
 {
     static Statement *stmt = nil;
+    
+    if (![Followee needUpdate:user]) {
+        return;
+    }
     if (stmt == nil) {
         stmt = [DBConnection statementWithQuery:"REPLACE INTO followees VALUES(?, ?, ?, ?)"];
         [stmt retain];

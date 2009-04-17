@@ -266,15 +266,18 @@ int sTextWidth[] = {
     
     if (inReplyTo == 0) inReplyTo = -1;
 
-//    static char *sql = "SELECT count(*) FROM statuses WHERE id = ? OR in_reply_to_status_id = ?";
-    static char *sql = "SELECT count(*) FROM statuses WHERE id = ?";
+//    static char *sql = "SELECT id FROM statuses WHERE id = ? OR in_reply_to_status_id = ?";
+    static char *sql = "SELECT id FROM statuses WHERE id = ?";
     Statement *stmt = [DBConnection statementWithQuery:sql];
         
     [stmt bindInt64:inReplyToStatusId       forIndex:1];
 //    [stmt bindInt64:tweetId                 forIndex:2];
-    [stmt step];
-        
-    return [stmt getInt32:0];
+    if ([stmt step] == SQLITE_ROW) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 - (int)getConversation:(NSMutableArray*)messages
@@ -294,20 +297,15 @@ int sTextWidth[] = {
     INIT_STOPWATCH(s);
     
     while ([idArray count]) {
-
-        NSString *replies = [idArray componentsJoinedByString:@","];
-        NSString *ids = [replyArray componentsJoinedByString:@","];
         
+        NSString *replies = [idArray componentsJoinedByString:@","];
         [idArray removeAllObjects];
-        [replyArray removeAllObjects];
 
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM statuses WHERE id IN (%@) OR in_reply_to_status_id IN (%@)", ids, replies];
+        NSString* sql = [NSString stringWithFormat:@"SELECT * FROM statuses WHERE in_reply_to_status_id IN (%@)", replies];        
         Statement *stmt = [DBConnection statementWithQuery:[sql UTF8String]];
         
-        //NSLog(@"Exec %@", sql);
         while ([stmt step] == SQLITE_ROW) {
             NSString *idStr = [NSString stringWithFormat:@"%lld", [stmt getInt64:0]];
-            //NSLog(@"Found %@", idStr);
             if (![hash objectForKey:idStr]) {
                 Status *s = [Status initWithStatement:stmt type:TWEET_TYPE_FRIENDS];
                 [hash setObject:s forKey:idStr];
@@ -317,11 +315,33 @@ int sTextWidth[] = {
                     [replyArray addObject:[NSNumber numberWithLongLong:s.inReplyToStatusId]];
                 }
                 
-                // Up to 100 messages
                 if (++count >= 100) break;
             }
         }
         [stmt reset];
+        
+        if ([replyArray count]) {
+            NSString *ids = [replyArray componentsJoinedByString:@","];
+            [replyArray removeAllObjects];            
+            sql = [NSString stringWithFormat:@"SELECT * FROM statuses WHERE id IN (%@)", ids];
+            stmt = [DBConnection statementWithQuery:[sql UTF8String]];
+            
+            while ([stmt step] == SQLITE_ROW) {
+                NSString *idStr = [NSString stringWithFormat:@"%lld", [stmt getInt64:0]];
+                if (![hash objectForKey:idStr]) {
+                    Status *s = [Status initWithStatement:stmt type:TWEET_TYPE_FRIENDS];
+                    [hash setObject:s forKey:idStr];
+                    [messages addObject:s];
+                    [idArray addObject:[NSNumber numberWithLongLong:s.tweetId]];
+                    if (s.inReplyToStatusId) {
+                        [replyArray addObject:[NSNumber numberWithLongLong:s.inReplyToStatusId]];
+                    }
+                    
+                    if (++count >= 100) break;
+                }
+            }
+            [stmt reset];   
+        }
     }
     
     LAP(s, @"Decode conversation");
@@ -387,10 +407,16 @@ int sTextWidth[] = {
 
 - (void)updateFavoriteState
 {
-    Statement *stmt = [DBConnection statementWithQuery:"UPDATE statuses SET favorited = ? WHERE id = ?"];
+    static Statement *stmt = nil;
+    if (stmt == nil) {
+        stmt = [DBConnection statementWithQuery:"UPDATE statuses SET favorited = ? WHERE id = ?"];
+        [stmt retain];
+    }
+    
     [stmt bindInt32:favorited forIndex:1];
     [stmt bindInt64:tweetId forIndex:2];
     [stmt step]; // ignore error
+    [stmt reset];
 }
 
 @end

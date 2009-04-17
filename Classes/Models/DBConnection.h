@@ -9,8 +9,7 @@
 }
 
 + (void)createEditableCopyOfDatabaseIfNeeded:(BOOL)force;
-+ (void)deleteMessageCache;
-+ (void)deleteImageCache;
++ (void)migrate:(NSString*)dbname to:(NSString*)newdbname queries:(NSString*)query_file;
 
 + (sqlite3*)getSharedDatabase;
 + (void)closeDatabase;

@@ -6,17 +6,23 @@
 //  Copyright 2008 naan studio. All rights reserved.
 //
 
+#import "DBConnection.h"
 #import "Statement.h"
+#import "TimeUtils.h"
 
+//#define DEBUG_QUERY
 
 @implementation Statement
 
 - (id)initWithDB:(sqlite3*)db query:(const char*)sql
 {
     self = [super init];
-    
+#ifdef DEBUG_QUERY    
+    query = [[NSString alloc] initWithUTF8String:sql];
+#endif
     if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
-        NSAssert2(0, @"Failed to prepare statement '%s' (%s)", sql, sqlite3_errmsg(db));
+        NSLog(@"Failed to prepare statement '%s' (SQL Error: %s)", sql, sqlite3_errmsg(db));
+        [DBConnection alert];
     }
     return self;
 }
@@ -28,7 +34,16 @@
 
 - (int)step
 {
-    return sqlite3_step(stmt);
+#ifdef DEBUG_QUERY
+    Stopwatch *sw = [Stopwatch stopwatch];
+#endif
+    int result = sqlite3_step(stmt);
+#ifdef DEBUG_QUERY
+    if ([sw diff] > 100 * 1000) {
+        [sw lap:query];
+    }
+#endif
+    return result;
 }
 
 - (void)reset
@@ -38,6 +53,9 @@
 
 - (void)dealloc
 {
+#ifdef DEBUG_QUERY
+    [query release];
+#endif
     sqlite3_finalize(stmt);
     [super dealloc];
 }

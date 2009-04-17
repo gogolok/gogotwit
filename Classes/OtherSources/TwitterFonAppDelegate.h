@@ -36,6 +36,10 @@ typedef enum {
     NSDate*                         lastRefreshDate;
     
     NSString*                       screenName;
+
+    BOOL                                needOptimizeDB;
+    IBOutlet UIWindow*                  HUD;
+    IBOutlet UIActivityIndicatorView*   spinner;
 }
 
 - (IBAction)post:(id)sender;

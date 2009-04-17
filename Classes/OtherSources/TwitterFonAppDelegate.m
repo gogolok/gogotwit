@@ -18,7 +18,6 @@
 #import "ColorUtils.h"
 #import "REString.h"
 
-
 @interface NSObject (TwitterFonAppDelegateDelegate)
 - (void)didLeaveTab:(UINavigationController*)navigationController;
 - (void)didSelectTab:(UINavigationController*)navigationController;
@@ -45,29 +44,24 @@
     [self initializeUserDefaults];
 
  	BOOL forceCreate = [[NSUserDefaults standardUserDefaults] boolForKey:@"clearLocalCache"];
-    [DBConnection createEditableCopyOfDatabaseIfNeeded:forceCreate];
-    [DBConnection getSharedDatabase];
     [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"clearLocalCache"];
     
 	NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
 	NSString *prevUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"prevUsername"];
 	NSString *password = [[NSUserDefaults standardUserDefaults] stringForKey:@"password"];
-    
-    BOOL needDeleteMessageCache = false;
 
     if (prevUsername != nil && [username caseInsensitiveCompare:prevUsername] != NSOrderedSame) {
-        needDeleteMessageCache = true;
+        forceCreate = true;
     }
 
     NSString *versionStr = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     [[NSUserDefaults standardUserDefaults] setObject:versionStr forKey:@"appVersion"];
-    
     [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"prevUsername"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    [DBConnection createEditableCopyOfDatabaseIfNeeded:forceCreate];
+    [DBConnection getSharedDatabase];
     
-    if (needDeleteMessageCache) {
-        [DBConnection deleteMessageCache];
-    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [UIColor initTwitterFonColorScheme];
     imageStore = [[ImageStore alloc] init];
@@ -76,37 +70,14 @@
     tabBarController.selectedIndex = TAB_FRIENDS;
     
   	[window addSubview:tabBarController.view];
+    [window makeKeyAndVisible];
+    HUD.hidden = true;
     
     if ([username length] == 0 || [password length] == 0) {
         [self openSettingsView];
     }
     else {
-        [self postInit];
-    }
-}
-
-- (void)initializeUserDefaults
-{
-    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"",                             @"username",
-                         @"",                             @"password",
-                         [NSNumber numberWithBool:false], @"clearLocalCache",
-                         [NSNumber numberWithBool:true],  @"loadAllTabOnLaunch",
-                         [NSNumber numberWithBool:true],  @"autoScrollToFirstUnread",
-                         [NSNumber numberWithInt:5],      @"autoRefresh",
-                         @"",                             @"tweet",
-                         [NSNumber numberWithLongLong:0], @"inReplyToStatusId",
-                         @"",                             @"to",
-                         @"",                             @"recipient",
-                         [NSNumber numberWithInt:2],      @"searchDistance",
-                         [NSNumber numberWithInt:50],     @"launchCount",
-                         [NSNumber numberWithInt:13],     @"fontSize",
-                         nil];
-
-    for (id key in dic) {
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:key] == nil) {
-            [[NSUserDefaults standardUserDefaults] setObject:[dic objectForKey:key] forKey:key];
-        }
+        [self performSelector:@selector(postInit) withObject:nil afterDelay:0.01];
     }
 }
 
@@ -141,6 +112,30 @@
     initialized = true;
 }
 
+- (void)initializeUserDefaults
+{
+    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         @"",                             @"username",
+                         @"",                             @"password",
+                         [NSNumber numberWithBool:false], @"clearLocalCache",
+                         [NSNumber numberWithBool:true],  @"loadAllTabOnLaunch",
+                         [NSNumber numberWithBool:true],  @"autoScrollToFirstUnread",
+                         [NSNumber numberWithInt:5],      @"autoRefresh",
+                         @"",                             @"tweet",
+                         [NSNumber numberWithLongLong:0], @"inReplyToStatusId",
+                         @"",                             @"to",
+                         @"",                             @"recipient",
+                         [NSNumber numberWithInt:2],      @"searchDistance",
+                         [NSNumber numberWithInt:13],     @"fontSize",
+                         nil];
+
+    for (id key in dic) {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:key] == nil) {
+            [[NSUserDefaults standardUserDefaults] setObject:[dic objectForKey:key] forKey:key];
+        }
+    }
+}
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     UINavigationController* nav = (UINavigationController*)[tabBarController.viewControllers objectAtIndex:selectedTab];
@@ -168,6 +163,7 @@
     if ([method isEqualToString:@"search"]) {
         [self search:[url query]];
     }
+    
     return YES;
 }
 
@@ -179,7 +175,8 @@
 
 - (void)postURLWithoutConvert:(NSURL*)url
 {
-    [self.postView editWithMessage:[url query]];
+    NSString* message = [url query];
+    [self.postView editWithMessage:[message stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [url release];
 }
 

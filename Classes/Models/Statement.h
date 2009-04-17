@@ -13,6 +13,7 @@
 //
 @interface Statement : NSObject
 {
+    NSString*       query;
     sqlite3_stmt*   stmt;
 }
 

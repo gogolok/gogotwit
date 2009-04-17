@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad
 {
+    page = 1;
     if (timeline == nil) {
         timeline = [[Timeline alloc] init];
     }
@@ -97,8 +98,12 @@
     int count = 0;
     while ([stmt step] == SQLITE_ROW) {
         Status* sts = [Status initWithStatement:stmt type:TWEET_TYPE_FAVORITES];
-        [timeline appendStatus:sts];
-        ++count;
+        if (sts) {
+            if ([timeline indexOfObject:sts] == -1) {
+                [timeline appendStatus:sts];
+                ++count;
+            }
+        }
     }
     isRestored = all;
     return count;
@@ -185,7 +190,7 @@
         if (twitterClient) return;
         [loadCell.spinner startAnimating];
         twitterClient = [[TwitterClient alloc] initWithTarget:self action:@selector(favoritesDidReceive:obj:)];
-        int page = ([timeline countStatuses] / 20) + 1;
+        ++page;
         [twitterClient favorites:screenName page:page];
     }
     else {
@@ -242,9 +247,21 @@
     else {
         return;
     }
+
+    int received = [ary count];
+    NSLog(@"Received %d favorites", received);
+    if (screenName == nil) {
+        int count = [timeline countStatuses];
+        if (count > received) {
+            NSRange r;
+            r.location = received;
+            r.length = [timeline countStatuses] - received;
+            [timeline removeStatusesInRange:r];
+        }
+    }
     
     // Add messages to the timeline
-    for (int i = 0; i < [ary count]; ++i) {
+    for (int i = 0; i < received; ++i) {
         NSDictionary *dic = (NSDictionary*)[ary objectAtIndex:i];
         if (![dic isKindOfClass:[NSDictionary class]]) {
             continue;
@@ -266,13 +283,22 @@
                 [sts updateFavoriteState];
             }
             else {
-                Status* sts = [Status statusWithJsonDictionary:[ary objectAtIndex:i] type:TWEET_TYPE_FAVORITES];
+                sts = [Status statusWithJsonDictionary:[ary objectAtIndex:i] type:TWEET_TYPE_FAVORITES];
                 sts.unread = false;
                 [sts insertDB];
             }
+            [timeline removeStatus:sts];
         }
     }
+    
     if (screenName == nil) {
+        for (int i = 0; i < [timeline countStatuses]; ++i) {
+            Status *sts = [timeline statusAtIndex:i];
+            NSLog(@"Remove favorite:%lld:%@:%@", sts.statusId, sts.user.screenName, sts.text);
+            sts.favorited = false;
+            [sts updateFavoriteState];
+        }
+    
         [timeline removeAllStatuses];
         [self restore:isRestored];
     }

@@ -18,6 +18,8 @@
     BOOL        notifications;
     BOOL        protected;
     BOOL        following;
+    
+    BOOL        needUpdate;
 }
 
 @property (nonatomic, assign) uint32_t  userId;
@@ -35,12 +37,12 @@
 @property (nonatomic, assign) BOOL      following;
 @property (nonatomic, assign) BOOL      notifications;
 
+@property (nonatomic, assign) BOOL      needUpdate;
+
 + (User*)userWithId:(int)id;
 + (User*)userWithJsonDictionary:(NSDictionary*)dic;
 + (User*)userWithSearchResult:(NSDictionary*)dic;
 
-- (User*)initWithJsonDictionary:(NSDictionary*)dic;
-- (User*)initWithSearchResult:(NSDictionary*)dic;
 - (void)updateWithJSonDictionary:(NSDictionary*)dic;
 - (void)updateDB;
 

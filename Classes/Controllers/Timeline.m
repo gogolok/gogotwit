@@ -68,6 +68,11 @@ static NSInteger sortByDate(id a, id b, void *context)
     [statuses removeObjectAtIndex:index];
 }
 
+- (void)removeStatusesInRange:(NSRange)r
+{
+    [statuses removeObjectsInRange:r];
+}
+
 - (void)removeAllStatuses
 {
     [statuses removeAllObjects];

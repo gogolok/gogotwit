@@ -227,6 +227,7 @@ enum {
         dic = (NSDictionary*)obj;
 
         [user updateWithJSonDictionary:dic];
+        [user updateDB];
         [userView setUser:user];
         detailLoaded = true;
 #ifndef USE_FRIENDSHIP_EXISTS_METHOD        

@@ -26,6 +26,7 @@
 
 - (void)removeStatus:(Status*)status;
 - (void)removeStatusAtIndex:(int)index;
+- (void)removeStatusesInRange:(NSRange)r;
 - (void)removeLastStatus;
 - (void)removeAllStatuses;
 

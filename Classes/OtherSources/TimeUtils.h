@@ -15,6 +15,7 @@
 }
 
 + (Stopwatch*) stopwatch;
+- (uint64_t)diff;
 - (void) lap:(NSString*)message;
 
 @end

@@ -253,6 +253,7 @@
     for (int i = 0; i < [ary count]; ++i) {
         Status* sts = [Status statusWithJsonDictionary:[ary objectAtIndex:i] type:TWEET_TYPE_FRIENDS];
         sts.cellType = TWEET_CELL_TYPE_USER;
+        [sts insertDBIfFollowing];
         [sts updateAttribute];
         [timeline appendStatus:sts];
     }
