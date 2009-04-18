@@ -1,3 +1,21 @@
+/*
+ *  Copyright (c) 2009 Robert Gogolok <gogolok+gogotwitter@googlemail.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
 //
 //  TwitterFonAppDelegate.m
 //  TwitterFon
@@ -6,7 +24,7 @@
 //  Copyright naan studio 2008. All rights reserved.
 //
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "FriendsTimelineController.h"
 #import "SearchViewController.h"
 #import "UserTimelineController.h"
@@ -18,20 +36,20 @@
 #import "ColorUtils.h"
 #import "REString.h"
 
-@interface NSObject (TwitterFonAppDelegateDelegate)
+@interface NSObject (GogoTwitterAppDelegateDelegate)
 - (void)didLeaveTab:(UINavigationController*)navigationController;
 - (void)didSelectTab:(UINavigationController*)navigationController;
 - (void)updateFavorite:(Status*)status;
 - (void)toggleFavorite:(BOOL)favorited status:(Status*)status;
 @end
 
-@interface TwitterFonAppDelegate(Private)
+@interface GogoTwitterAppDelegate(Private)
 - (void)postInit;
 - (void)initializeUserDefaults;
 - (void)setNextTimer:(NSTimeInterval)interval;
 @end
 
-@implementation TwitterFonAppDelegate
+@implementation GogoTwitterAppDelegate
 
 @synthesize window;
 @synthesize postView;
@@ -63,7 +81,7 @@
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [UIColor initTwitterFonColorScheme];
+    [UIColor initGogoTwitterColorScheme];
     imageStore = [[ImageStore alloc] init];
     postView = nil;
     selectedTab = 0;
@@ -613,13 +631,13 @@ static UIAlertView *sAlert = nil;
 
 + (BOOL)isMyScreenName:(NSString*)screen_name
 {
-    TwitterFonAppDelegate *delegate = [TwitterFonAppDelegate getAppDelegate];
+    GogoTwitterAppDelegate *delegate = [GogoTwitterAppDelegate getAppDelegate];
     return ([delegate.screenName caseInsensitiveCompare:screen_name] == NSOrderedSame) ? true : false;
 }
 
-+(TwitterFonAppDelegate*)getAppDelegate
++(GogoTwitterAppDelegate*)getAppDelegate
 {
-    return (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    return (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
 }
 
 @end

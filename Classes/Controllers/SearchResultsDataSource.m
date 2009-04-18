@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "SearchResultsDataSource.h"
 #import "TweetViewController.h"
 #import "TimelineCell.h"

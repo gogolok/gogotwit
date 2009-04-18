@@ -6,7 +6,7 @@
 //  Copyright 2008 naan studio. All rights reserved.
 //
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "TrendsDataSource.h"
 #import "TwitterClient.h"
 

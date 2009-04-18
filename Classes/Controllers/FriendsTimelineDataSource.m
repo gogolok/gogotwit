@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "FriendsTimelineDataSource.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "TweetViewController.h"
 #import "ProfileViewController.h"
 
@@ -127,7 +127,7 @@
     int since_id = 0;
     for (int i = 0; i < [timeline countStatuses]; ++i) {
         Status* sts = [timeline statusAtIndex:i];
-        if ([TwitterFonAppDelegate isMyScreenName:sts.user.screenName] == false) {
+        if ([GogoTwitterAppDelegate isMyScreenName:sts.user.screenName] == false) {
             since_id = sts.statusId;
             break;
         }
@@ -152,7 +152,7 @@
         }
         
         if (sender.statusCode == 401) {
-            TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+            GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
             [appDelegate openSettingsView];
         }
         [sender alert];

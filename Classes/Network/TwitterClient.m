@@ -6,7 +6,7 @@
 //  Copyright naan studio 2008. All rights reserved.
 //
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "DirectMessage.h"
 #import "TwitterClient.h"
 #import "StringUtil.h"
@@ -101,7 +101,7 @@ NSString* sMethods[4] = {
     needAuth = true;
     
     NSString* url = @"https://twitter.com/statuses/update.json";
-    NSString *postString = [NSString stringWithFormat:@"status=%@&in_reply_to_status_id=%lld&source=twitterfon",
+    NSString *postString = [NSString stringWithFormat:@"status=%@&in_reply_to_status_id=%lld&source=gogotwitter",
                             [tweet encodeAsURIComponent],
                             statusId];
 
@@ -345,7 +345,7 @@ NSString* sMethods[4] = {
 
 - (void)alert
 {
-    [[TwitterFonAppDelegate getAppDelegate] alert:errorMessage message:errorDetail];
+    [[GogoTwitterAppDelegate getAppDelegate] alert:errorMessage message:errorDetail];
 }
 
 @end

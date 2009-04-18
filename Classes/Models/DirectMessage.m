@@ -1,4 +1,4 @@
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "DirectMessage.h"
 #import "DBConnection.h"
 #import "Followee.h"
@@ -127,7 +127,7 @@
     
     while ([stmt step] == SQLITE_ROW) {
         DirectMessage *dm = [DirectMessage initWithStatement:stmt];
-        if ([TwitterFonAppDelegate isMyScreenName:dm.senderScreenName] == false) {
+        if ([GogoTwitterAppDelegate isMyScreenName:dm.senderScreenName] == false) {
             [array addObject:dm];
             ++count;
         }
@@ -186,7 +186,7 @@
 + (sqlite_int64)lastSentMessageId
 {
     Statement* stmt = [DBConnection statementWithQuery:"SELECT id FROM direct_messages WHERE sender_screen_name = ? ORDER BY id DESC LIMIT 1"];
-    [stmt bindString:[TwitterFonAppDelegate getAppDelegate].screenName forIndex:1];
+    [stmt bindString:[GogoTwitterAppDelegate getAppDelegate].screenName forIndex:1];
     
     sqlite_int64 ret = 0;
     if ([stmt step] == SQLITE_ROW) {

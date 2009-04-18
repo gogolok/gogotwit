@@ -7,7 +7,7 @@
 //
 
 #import "ProfileImageCell.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 
 @implementation ProfileImageCell
 
@@ -33,7 +33,7 @@
     }
     _profileImageUrl = [url copy];
     
-    ImageStore *store = [TwitterFonAppDelegate getAppDelegate].imageStore;
+    ImageStore *store = [GogoTwitterAppDelegate getAppDelegate].imageStore;
     UIImage *image = [store getProfileImage:url isLarge:flag delegate:_receiver];
     _receiver.imageContainer = self;
     return image;
@@ -42,14 +42,14 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-    ImageStore *store = [TwitterFonAppDelegate getAppDelegate].imageStore;
+    ImageStore *store = [GogoTwitterAppDelegate getAppDelegate].imageStore;
     [store removeDelegate:_receiver forURL:_profileImageUrl];
     _receiver.imageContainer = nil;
 }
 
 - (void)dealloc {
     _receiver.imageContainer = nil;
-    ImageStore *store = [TwitterFonAppDelegate getAppDelegate].imageStore;
+    ImageStore *store = [GogoTwitterAppDelegate getAppDelegate].imageStore;
     [store removeDelegate:_receiver forURL:_profileImageUrl];
     [_profileImageUrl release];
     [_receiver release];

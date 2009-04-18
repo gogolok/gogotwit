@@ -8,7 +8,7 @@
 
 #import "FriendsTimelineController.h"
 #import "FriendsTimelineDataSource.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "ColorUtils.h"
 
 @interface FriendsTimelineController (Private)
@@ -72,7 +72,7 @@
 - (void)didReceiveMemoryWarning 
 {
 #if 0
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     if (appDelegate.selectedTab != [self navigationController].tabBarItem.tag) {
         [super didReceiveMemoryWarning];
     }
@@ -144,7 +144,7 @@
 }
 
 //
-// TwitterFonApPDelegate delegate
+// GogoTwitterApPDelegate delegate
 //
 - (void)didLeaveTab:(UINavigationController*)navigationController
 {

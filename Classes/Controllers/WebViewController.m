@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "WebViewController.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "StringUtil.h"
 
 #define kAnimationKey @"transitionViewAnimation"
@@ -150,7 +150,7 @@ typedef enum {
         [[UIApplication sharedApplication] openURL:currentURL];
     }
     else {
-        NSString *body = @"\n\nSent from <a href=\"http://twitterfon.net\">TwitterFon</a>";
+        NSString *body = @"\n\nSent from <a href=\"http://www.FIXME..net\">GogoTwitter</a>";
         
         NSString *mailTo = [NSString stringWithFormat:@"mailto:?subject=%@&body=%@%@",
                             [titleLabel.text encodeAsURIComponent],
@@ -190,7 +190,7 @@ static NSString *schemes[NUM_SCHEMES][2] = {
     for (int i = 0; i < NUM_SCHEMES; ++i) {
         NSRange r = [aURL rangeOfString:schemes[i][0]];
         if (r.location != NSNotFound) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"TwitterFon"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"GogoTwitter"
                                                             message:[NSString stringWithFormat:@"You are opening %@", schemes[i][1]]
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
@@ -231,7 +231,7 @@ static NSString *schemes[NUM_SCHEMES][2] = {
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     if ([error code] <= NSURLErrorBadURL) {
-        [[TwitterFonAppDelegate getAppDelegate] alert:@"Failed to load the page" message:[error localizedDescription]];
+        [[GogoTwitterAppDelegate getAppDelegate] alert:@"Failed to load the page" message:[error localizedDescription]];
     }
     [self updateToolbar:BUTTON_RELOAD];
 }
@@ -245,7 +245,7 @@ static NSString *schemes[NUM_SCHEMES][2] = {
 
 - (void)postTweet:(id)sender
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     PostViewController* postView = appDelegate.postView;
     
     NSString *aURL = [currentURL absoluteString];

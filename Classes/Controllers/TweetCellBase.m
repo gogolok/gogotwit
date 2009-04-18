@@ -1,5 +1,5 @@
 #import <QuartzCore/QuartzCore.h>
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "TweetCellBase.h"
 
 @implementation TweetCellBase
@@ -36,7 +36,7 @@
 
 - (void)didTouchLinkButton:(id)sender
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate openLinksViewController:status.text];
 }
 

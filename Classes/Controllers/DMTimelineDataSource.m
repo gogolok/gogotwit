@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "FriendsTimelineDataSource.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "TweetViewController.h"
 #import "ProfileViewController.h"
 
@@ -198,7 +198,7 @@ static UIAlertView* sAlert = nil;
     }
     
     if (sender.statusCode == 401) {
-        TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+        GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
         [appDelegate openSettingsView];
     }
 

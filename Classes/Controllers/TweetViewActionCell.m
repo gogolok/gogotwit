@@ -7,7 +7,7 @@
 //
 
 #import "TweetViewActionCell.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 
 @implementation TweetViewActionCell
 
@@ -38,7 +38,7 @@
 
 - (void)postTweet:(id)sender
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     PostViewController* postView = appDelegate.postView;
 
     if (sender == reply) {

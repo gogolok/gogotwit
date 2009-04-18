@@ -1,3 +1,21 @@
+/*
+ *  Copyright (c) 2009 Robert Gogolok <gogolok+gogotwitter@googlemail.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
 //
 //  SettingsTableViewController.m
 //  TwitterFon
@@ -7,7 +25,7 @@
 //
 
 #import "SettingsViewController.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "REString.h"
 
 enum {
@@ -89,7 +107,7 @@ static NSString* sSectionHeader[NUM_SECTIONS] = {
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return @"You can customize TwitterFon preferences\nwith \"Settings\" application.";
+        return @"You can customize GogoTwitter preferences\nwith \"Settings\" application.";
     }
     else {
         return nil;
@@ -137,7 +155,7 @@ static NSString* sSectionHeader[NUM_SECTIONS] = {
 
 - (void)openURL:(NSString*)url
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate openWebView:url on:[self navigationController]];
 }
 
@@ -159,7 +177,7 @@ static NSString* sSectionHeader[NUM_SECTIONS] = {
             
         case SECTION_HELP:
             if (indexPath.row == ROW_HELP) {
-                [self openURL:@"http://twitterfon.com/"];
+                [self openURL:@"http://www.FIXME.com/"];
             }
             break;
             
@@ -184,7 +202,7 @@ static NSString* sSectionHeader[NUM_SECTIONS] = {
 - (IBAction)done:(id)sender
 {
     if (![usernameField.text matches:@"^[0-9A-Za-z_]+$" withSubstring:nil]) {
-        [[TwitterFonAppDelegate getAppDelegate] alert:@"Invalid screen name" 
+        [[GogoTwitterAppDelegate getAppDelegate] alert:@"Invalid screen name" 
                                               message:@"Username can only contain letters, numbers and '_'"];
     }
     else {
@@ -205,7 +223,7 @@ static NSString* sSectionHeader[NUM_SECTIONS] = {
     }
     else {
         [self dismissModalViewControllerAnimated:true];
-        TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+        GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
         [appDelegate closeSettingsView];
     }
 }

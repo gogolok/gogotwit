@@ -14,7 +14,7 @@
 #import "TweetViewController.h"
 #import "LoadCell.h"
 #import "DBConnection.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 
 @implementation FavoritesViewController
 
@@ -271,7 +271,7 @@
             Status* sts = [Status statusWithJsonDictionary:[ary objectAtIndex:i] type:TWEET_TYPE_FAVORITES];
             sts.unread = false;
             [timeline appendStatus:sts];
-            if ([TwitterFonAppDelegate isMyScreenName:screenName]) {
+            if ([GogoTwitterAppDelegate isMyScreenName:screenName]) {
                 [sts insertDB];
             }
         }

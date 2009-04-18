@@ -6,7 +6,7 @@
 //  Copyright 2008 naan studio. All rights reserved.
 //
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "FriendsViewController.h"
 #import "ProfileViewController.h"
 #import "LoadCell.h"
@@ -138,7 +138,7 @@
     hasMore = true;
     
     BOOL ownFriendsList = false;
-    if (!isFollowers && [TwitterFonAppDelegate isMyScreenName:screenName]) {
+    if (!isFollowers && [GogoTwitterAppDelegate isMyScreenName:screenName]) {
         ownFriendsList = true;
     }
     

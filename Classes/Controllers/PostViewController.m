@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "PostViewController.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "FolloweesViewController.h"
 #import "PostImagePickerController.h"
 #import "TinyURL.h"
@@ -278,7 +278,7 @@
     
     static NSString *nameRegexp = @"^[0-9a-zA-Z_]+$";
     if (isDirectMessage && ![recipient.text matches:nameRegexp withSubstring:nil]) {
-        [[TwitterFonAppDelegate getAppDelegate] alert:@"Can't send this message" 
+        [[GogoTwitterAppDelegate getAppDelegate] alert:@"Can't send this message" 
                                               message:@"Recipient's name contains wrong character. Username can only contain letters, numbers and '_'."];
         return;
     }
@@ -319,7 +319,7 @@
 
 - (void)twitPicClientDidFail:(TwitPicClient*)sender error:(NSString*)error detail:(NSString*)detail
 {
-    [[TwitterFonAppDelegate getAppDelegate] alert:error message:detail];
+    [[GogoTwitterAppDelegate getAppDelegate] alert:error message:detail];
     [sender release];
     connection = nil;
     [progressWindow hide];
@@ -519,7 +519,7 @@
     }
    
     if (dic) {
-        TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+        GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
         if (isDirectMessage) {
             [appDelegate sendMessageDidSucceed:dic];
         }
@@ -566,7 +566,7 @@
 
 - (void)tinyURLDidFail:(TinyURL*)sender error:(NSString*)error
 {
-    [[TwitterFonAppDelegate getAppDelegate] alert:@"Error encoding TinyURL" message:error];
+    [[GogoTwitterAppDelegate getAppDelegate] alert:@"Error encoding TinyURL" message:error];
 }
 
 //
@@ -632,11 +632,11 @@
     else {
         [self.view removeFromSuperview];
         
-        TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+        GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
         [appDelegate.window makeKeyWindow];
         
         if (finished && didPost) {
-            TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+            GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
             [appDelegate postViewAnimationDidFinish:isDirectMessage];
         }
     }

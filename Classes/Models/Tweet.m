@@ -1,6 +1,6 @@
 #import "Tweet.h"
 #import "REString.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 
 @implementation Tweet
 
@@ -93,7 +93,7 @@ static NSString *hashRegexp = @"(#[a-zA-Z0-9\\-_\\.+:=]+)";
     
     while ([tmp matches:userRegexp withSubstring:array]) {
         NSString *match = [array objectAtIndex:0]; 
-        if ([TwitterFonAppDelegate isMyScreenName:match]) {
+        if ([GogoTwitterAppDelegate isMyScreenName:match]) {
             hasReply = true;
             if (type != TWEET_TYPE_REPLIES) {
                 ++hasUsername;

@@ -7,7 +7,7 @@
 //
 
 #import "ChatBubbleView.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "ColorUtils.h"
 
 static UIImage* sGreenBubble = nil;

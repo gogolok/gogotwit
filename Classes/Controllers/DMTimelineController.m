@@ -10,7 +10,7 @@
 #import "ConversationController.h"
 #import "DirectMessage.h"
 #import "DirectMessageCell.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "DBConnection.h"
 #import "Tweet.h"
 #import "LoadCell.h"
@@ -76,7 +76,7 @@ static NSInteger sortByDate(id a, id b, void *context)
 
 - (void)didReceiveMemoryWarning 
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     if (appDelegate.selectedTab != [self navigationController].tabBarItem.tag) {
         [super didReceiveMemoryWarning];
     }
@@ -363,7 +363,7 @@ static NSInteger sortByDate(id a, id b, void *context)
 }
 
 //
-// TwitterFonApPDelegate delegate
+// GogoTwitterApPDelegate delegate
 //
 - (void)didLeaveTab:(UINavigationController*)navigationController
 {

@@ -7,7 +7,7 @@
 //
 #import <QuartzCore/QuartzCore.h>
 #import "UserTimelineController.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "ProfileViewController.h"
 #import "TweetViewController.h"
 #import "UserTimelineCell.h"
@@ -69,7 +69,7 @@
 {
     self.title = screenName;
     
-    if ([TwitterFonAppDelegate isMyScreenName:screenName]) {
+    if ([GogoTwitterAppDelegate isMyScreenName:screenName]) {
         self.navigationItem.rightBarButtonItem = self.editButtonItem;
     }
     else {
@@ -320,7 +320,7 @@
 
 - (void)postTweet:(id)sender
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     PostViewController* postView = appDelegate.postView;
     
     if ([self tabBarController].selectedIndex == TAB_MESSAGES) {
@@ -343,7 +343,7 @@
     
     if (twitterClient) return false;
     
-    if ([TwitterFonAppDelegate isMyScreenName:screenName]) {
+    if ([GogoTwitterAppDelegate isMyScreenName:screenName]) {
         Status* sts = [timeline statusAtIndex:indexPath.row - 1];
         return (sts) ? true : false;
     }
@@ -357,7 +357,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Status* sts = [timeline statusAtIndex:indexPath.row - 1];
-        TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+        GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
         TwitterClient* client = [[TwitterClient alloc] initWithTarget:appDelegate action:@selector(tweetDidDelete:obj:)];
         client.context = [sts retain];
         [timeline removeStatus:sts];

@@ -1,6 +1,6 @@
 //
 //  UserDetailViewController.m
-//  TwitterFon
+//  GogoTwitter
 //
 //  Created by kaz on 11/16/08.
 //  Copyright 2008 naan studio. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "ProfileViewController.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "WebViewController.h"
 #import "FriendsViewController.h"
 #import "UserTimelineController.h"
@@ -33,7 +33,7 @@ enum {
     self = [super initWithStyle:UITableViewStyleGrouped];
     
     user = aUser;
-    if ([TwitterFonAppDelegate isMyScreenName:user.screenName]) {
+    if ([GogoTwitterAppDelegate isMyScreenName:user.screenName]) {
         ownInfo = true;
     }
     else {
@@ -308,7 +308,7 @@ enum {
 
 - (void)postTweet:(id)sender
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     PostViewController* postView = appDelegate.postView;
     
     if ([self tabBarController].selectedIndex == TAB_MESSAGES) {

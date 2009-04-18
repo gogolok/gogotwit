@@ -6,7 +6,7 @@
 //  Copyright 2009 naan studio. All rights reserved.
 //
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "DMDetailCell.h"
 
 @implementation DMDetailCell

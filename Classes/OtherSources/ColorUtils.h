@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (UIColorUtils)
-+ (void)initTwitterFonColorScheme;
++ (void)initGogoTwitterColorScheme;
 
 + (UIColor*)navigationColorForTab:(int)tab;
 + (UIColor*)cellColorForTab:(int)tab;

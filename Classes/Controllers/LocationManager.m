@@ -6,7 +6,7 @@
 //  Copyright 2008 naan studio. All rights reserved.
 //
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "LocationManager.h"
 
 @interface NSObject (LocationManagerDelegate)
@@ -100,7 +100,7 @@
         [location release];
         location = nil;
     }
-    [[TwitterFonAppDelegate getAppDelegate] alert:@"Location Service Error" message:@"Operation timeout"];
+    [[GogoTwitterAppDelegate getAppDelegate] alert:@"Location Service Error" message:@"Operation timeout"];
     [delegate locationManagerDidFail:self];
 }
 
@@ -109,7 +109,7 @@
     [locationManager stopUpdatingLocation];
     
     if (!([error code] == kCLErrorDenied && [[error domain] isEqualToString:kCLErrorDomain])) {
-        [[TwitterFonAppDelegate getAppDelegate] alert:@"Location Service Error" message:[error localizedDescription]];
+        [[GogoTwitterAppDelegate getAppDelegate] alert:@"Location Service Error" message:[error localizedDescription]];
     }
     else if ([error code] == kCLErrorLocationUnknown) {
         // Ignore this error and keep tracking

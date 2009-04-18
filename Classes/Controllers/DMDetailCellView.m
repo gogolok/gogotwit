@@ -7,14 +7,14 @@
 //
 
 #import "DMDetailCellView.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "Status.h"
 
 @implementation DMDetailCellView
 
 - (void)didTouchLinkButton:(id)sender
 {
-    [[TwitterFonAppDelegate getAppDelegate] openLinksViewController:message.text];
+    [[GogoTwitterAppDelegate getAppDelegate] openLinksViewController:message.text];
 }
 
 - (CGFloat)setMessage:(DirectMessage*)value

@@ -7,7 +7,7 @@
 //
 
 #import "LinkViewController.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "UserTimelineController.h"
 
 @implementation LinkViewController
@@ -53,7 +53,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     NSRange r = [cell.text rangeOfString:@"http://"];

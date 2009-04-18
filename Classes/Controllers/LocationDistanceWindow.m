@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "LocationDistanceWindow.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 
 @implementation LocationDistanceWindow
 
@@ -131,7 +131,7 @@ static int sDistances[9] = {1, 2, 5, 10, 25, 50, 100, 250, 500};
 {
     [self autorelease];
     
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate.window makeKeyWindow];
 }
 

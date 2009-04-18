@@ -1,5 +1,5 @@
 #import <QuartzCore/QuartzCore.h>
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "TimelineCell.h"
 #import "ColorUtils.h"
 
@@ -18,7 +18,7 @@
 
 - (void)didTouchImageButton:(id)sender
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     
     PostViewController* postView = appDelegate.postView;
     [postView inReplyTo:status];

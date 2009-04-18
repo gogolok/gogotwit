@@ -7,7 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "DMDetailViewController.h"
 #import "ProfileViewController.h"
 #import "UserTimelineController.h"
@@ -54,7 +54,7 @@ enum {
     [userView setUser:message.sender];
     self.title = message.sender.screenName;
     
-    if ([TwitterFonAppDelegate isMyScreenName:message.sender.screenName]) {
+    if ([GogoTwitterAppDelegate isMyScreenName:message.sender.screenName]) {
         isOwnMessage = true;
     }
     else {
@@ -202,7 +202,7 @@ enum {
 
 - (void)postTweet:(id)sender
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     PostViewController* postView = appDelegate.postView;
     
     [postView editDirectMessage:message.sender.screenName];
@@ -216,7 +216,7 @@ enum {
 
     // Delete message
     //
-    TwitterClient* client = [[TwitterClient alloc] initWithTarget:[TwitterFonAppDelegate getAppDelegate]
+    TwitterClient* client = [[TwitterClient alloc] initWithTarget:[GogoTwitterAppDelegate getAppDelegate]
                                                            action:@selector(messageDidDelete:obj:)];
     client.context = [message retain];
     [client destroy:message];

@@ -1,5 +1,5 @@
 #import <QuartzCore/QuartzCore.h>
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "UserTimelineCell.h"
 
 static UIImage* sFavorite = nil;
@@ -21,7 +21,7 @@ static UIImage* sFavorited = nil;
 
 - (void)didTouchImageButton:(id)sender
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     [self toggleSpinner:true];
     [appDelegate toggleFavorite:status];
 }

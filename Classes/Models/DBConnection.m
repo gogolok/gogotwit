@@ -1,7 +1,7 @@
 #import "DBConnection.h"
 #import "Statement.h"
 #import "TimeUtils.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 
 static sqlite3*             theDatabase = nil;
 
@@ -34,7 +34,7 @@ const char *delete_tweets =
     if (sqlite3_open([path UTF8String], &instance) != SQLITE_OK) {
         // Even though the open failed, call close to properly clean up resources.
         NSString *msg = [NSString stringWithUTF8String:sqlite3_errmsg(instance)];
-        [[TwitterFonAppDelegate getAppDelegate] alert:@"Failed to open database" message:msg];
+        [[GogoTwitterAppDelegate getAppDelegate] alert:@"Failed to open database" message:msg];
         NSLog(@"Failed to open database. (%@)", msg);
         sqlite3_close(instance);
         instance = nil;
@@ -50,7 +50,7 @@ const char *delete_tweets =
         theDatabase = [self openDatabase:MAIN_DATABASE_NAME];
         if (theDatabase == nil) {
             [DBConnection createEditableCopyOfDatabaseIfNeeded:true];
-            [[TwitterFonAppDelegate getAppDelegate] alert:@"Local cache error" 
+            [[GogoTwitterAppDelegate getAppDelegate] alert:@"Local cache error" 
                                                   message:@"Local cache database has been corrupted. Re-created new database."];
         }
 
@@ -152,7 +152,7 @@ const char *delete_tweets =
 + (void)alert
 {
     NSString *sqlite3err = [NSString stringWithUTF8String:sqlite3_errmsg(theDatabase)];
-    [[TwitterFonAppDelegate getAppDelegate] alert:@"Local cache db error" message:sqlite3err];
+    [[GogoTwitterAppDelegate getAppDelegate] alert:@"Local cache db error" message:sqlite3err];
 }
 
 @end

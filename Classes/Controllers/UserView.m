@@ -6,7 +6,7 @@
 //  Copyright 2008 naan studio. All rights reserved.
 //
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "UserView.h"
 #import "QuartzUtils.h"
 #import "ColorUtils.h"
@@ -190,7 +190,7 @@
 
 - (void)didTouchURL:(id)sender
 {
-    TwitterFonAppDelegate *appDelegate = (TwitterFonAppDelegate*)[UIApplication sharedApplication].delegate;
+    GogoTwitterAppDelegate *appDelegate = (GogoTwitterAppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate openWebView:user.url];
 }
 

@@ -6,7 +6,7 @@
 //  Copyright naan studio 2008. All rights reserved.
 //
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "TwitPicClient.h"
 #import "StringUtil.h"
 #import "REString.h"
@@ -51,7 +51,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                          username, @"username",
                          password, @"password",
-                         @"TwitterFon", @"source", nil];
+                         @"GogoTwitter", @"source", nil];
     
     NSString *param = [self nameValString:dic];
     NSString *footer = [NSString stringWithFormat:@"\n--%@--\n", TWITTERFON_FORM_BOUNDARY];

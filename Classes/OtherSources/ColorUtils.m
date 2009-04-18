@@ -13,7 +13,7 @@ static UIColor *gUnreadCellColors[5];
 
 @implementation UIColor (UIColorUtils)
 
-+ (void) initTwitterFonColorScheme
++ (void) initGogoTwitterColorScheme
 {
     gUnreadCellColors[0] = [[UIColor colorWithRed:0.827 green:1.000 blue:1.000 alpha:1.0] retain]; // friends
     gUnreadCellColors[1] = [[UIColor colorWithRed:0.827 green:1.000 blue:0.820 alpha:1.0] retain]; // replies

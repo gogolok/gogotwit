@@ -7,7 +7,7 @@
 //
 
 #import "DirectMessageCell.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "ColorUtils.h"
 
 @implementation DirectMessageCell

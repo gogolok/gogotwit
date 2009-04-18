@@ -6,7 +6,7 @@
 //  Copyright 2008 naan studio. All rights reserved.
 //
 
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "ConversationController.h"
 #import "DMDetailViewController.h"
 #import "TweetViewController.h"
@@ -148,7 +148,7 @@
     }
     
     if ([msg isKindOfClass:[DirectMessage class]]) {
-        BOOL isOwn = [TwitterFonAppDelegate isMyScreenName:msg.user.screenName];
+        BOOL isOwn = [GogoTwitterAppDelegate isMyScreenName:msg.user.screenName];
         [cell setMessage:msg type:isOwn ? BUBBLE_TYPE_GREEN : BUBBLE_TYPE_GRAY];
     }
     else {
@@ -204,7 +204,7 @@
 
 - (void)postTweet:(id)sender
 {
-    PostViewController* postView = [TwitterFonAppDelegate getAppDelegate].postView;
+    PostViewController* postView = [GogoTwitterAppDelegate getAppDelegate].postView;
     [postView editDirectMessage:self.navigationItem.title];
 }
 

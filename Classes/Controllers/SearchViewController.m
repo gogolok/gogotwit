@@ -6,7 +6,7 @@
 //  Copyright 2008 naan studio. All rights reserved.
 //
 #import <QuartzCore/QuartzCore.h>
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 #import "SearchViewController.h"
 #import "SearchHistoryViewController.h"
 #import "LocationDistanceWindow.h"
@@ -210,7 +210,7 @@
 }
 
 //
-// TwitterFonApPDelegate delegate
+// GogoTwitterApPDelegate delegate
 //
 - (void)didLeaveTab:(UINavigationController*)navigationController
 {

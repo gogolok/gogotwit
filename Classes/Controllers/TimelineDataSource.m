@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "TimelineDataSource.h"
-#import "TwitterFonAppDelegate.h"
+#import "GogoTwitterAppDelegate.h"
 
 @implementation TimelineDataSource
 
