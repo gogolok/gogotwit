@@ -146,7 +146,7 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* GogoTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GogoTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* GogoTwit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GogoTwit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28A0AB4B0D9B1048005BE974 /* GogoTwitter_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GogoTwitter_Prefix.pch; sourceTree = "<group>"; };
 		6E021A720E60109000D0869A /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
@@ -394,7 +394,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* GogoTwitter.app */,
+				1D6058910D05DD3D006BFB54 /* GogoTwit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -911,9 +911,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* GogoTwitter */ = {
+		1D6058900D05DD3D006BFB54 /* GogoTwit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "GogoTwitter" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "GogoTwit" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -923,9 +923,9 @@
 			);
 			dependencies = (
 			);
-			name = GogoTwitter;
+			name = GogoTwit;
 			productName = GogoTwitter;
-			productReference = 1D6058910D05DD3D006BFB54 /* GogoTwitter.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* GogoTwit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -933,14 +933,14 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GogoTwitter" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GogoTwit" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* GogoTwitter */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* GogoTwitter */,
+				1D6058900D05DD3D006BFB54 /* GogoTwit */,
 			);
 		};
 /* End PBXProject section */
@@ -1107,9 +1107,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = GogoTwitter_Prefix.pch;
+				GCC_PREFIX_HEADER = GogoTwit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = GogoTwitter;
+				PRODUCT_NAME = GogoTwit;
+				SDKROOT = iphoneos2.2.1;
 			};
 			name = Debug;
 		};
@@ -1123,9 +1124,10 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = GogoTwitter_Prefix.pch;
+				GCC_PREFIX_HEADER = GogoTwit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = GogoTwitter;
+				PRODUCT_NAME = GogoTwit;
+				SDKROOT = iphoneos2.2.1;
 			};
 			name = Release;
 		};
@@ -1159,9 +1161,10 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = GogoTwitter_Prefix.pch;
+				GCC_PREFIX_HEADER = GogoTwit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = GogoTwitter;
+				PRODUCT_NAME = GogoTwit;
+				SDKROOT = iphoneos2.2.1;
 			};
 			name = Adhoc;
 		};
@@ -1177,8 +1180,6 @@
 				LD_GENERATE_MAP_FILE = YES;
 				OTHER_CFLAGS = "-DDISTRIBUTION";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "0F74D6AA-1337-43EC-9E34-0AFB081302DE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0F74D6AA-1337-43EC-9E34-0AFB081302DE";
 				"PROVISIONING_PROFILE[sdk=iphoneos2.0]" = "C6EA6298-E7AA-4BF7-B32F-79E98AFE1081";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				SDKROOT = iphoneos2.0;
@@ -1195,9 +1196,10 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = GogoTwitter_Prefix.pch;
+				GCC_PREFIX_HEADER = GogoTwit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = GogoTwitter;
+				PRODUCT_NAME = GogoTwit;
+				SDKROOT = iphoneos2.2.1;
 			};
 			name = Distribution;
 		};
@@ -1237,7 +1239,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "GogoTwitter" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "GogoTwit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -1248,7 +1250,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GogoTwitter" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GogoTwit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
